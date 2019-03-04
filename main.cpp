@@ -1,9 +1,10 @@
 /*
   Sohrab Roohi
 */
-
+#pragma once
 #include <bits/stdc++.h>
 #include "AI.h"
+#include "GameManager.h"
 
 using namespace std;
 
@@ -39,61 +40,30 @@ int main() {
 
     game g(true);
     AI AI;
+    GameManager manager(g);
 
     while(true) {
         if(g.getTurn()) {
             g.printGrid();
             while(!doCommand(g));
-            if(g.checkForWin(true)) {
-                cout << "You win!" << endl;
-                g.printGrid();
-                g.newGame();
-                g.setnewflag(false);
-                continue;
-            }
-            if(g.getnewflag()) {
-                g.setnewflag(false);
-                continue;
-            }
-            if(g.getundoflag()) {
-                g.setundoflag(false);
-                continue;
-            }
+            if(manager.checkWon(true)) continue;
+            if(manager.checkDraw()) continue;
+            if(manager.newCheck()) continue;
+            if(manager.undoCheck()) continue;
             AI.makeMove(g);
-            if(g.checkForWin(false)) {
-                cout << "You lose!" << endl;
-                g.printGrid();
-                g.newGame();
-                g.setnewflag(false);
-                continue;
-            }
+            if(manager.checkWon(false)) continue;
+            if(manager.checkDraw()) continue;
         }
         else {
             AI.makeMove(g);
-            if(g.checkForWin(false)) {
-                cout << "You lose!" << endl;
-                g.printGrid();
-                g.newGame();
-                g.setnewflag(false);
-                continue;
-            }
+            if(manager.checkWon(false)) continue;
+            if(manager.checkDraw()) continue;
             g.printGrid();
             while(!doCommand(g));
-            if(g.checkForWin(true)) {
-                cout << "You win!" << endl;
-                g.printGrid();
-                g.newGame();
-                g.setnewflag(false);
-                continue;
-            }
-            if(g.getnewflag()) {
-                g.setnewflag(false);
-                continue;
-            }
-            if(g.getundoflag()) {
-                g.setundoflag(false);
-                continue;
-            }
+            if(manager.checkWon(true)) continue;
+            if(manager.newCheck()) continue;
+            if(manager.undoCheck()) continue;
+            if(manager.checkDraw()) continue;
         }
     }
 

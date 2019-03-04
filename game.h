@@ -1,7 +1,7 @@
 /*
   Sohrab Roohi
 */
-
+#pragma once
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -31,4 +31,5 @@ class game {
     bool getundoflag();
     void setundoflag(bool flag);
     bool checkForWin(bool player);
+    bool checkForDraw();
 };

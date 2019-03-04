@@ -1,7 +1,7 @@
 /*
   Sohrab Roohi
 */
-
+#pragma once
 #include <bits/stdc++.h>
 #include "game.h"
 

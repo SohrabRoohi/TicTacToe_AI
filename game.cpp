@@ -149,4 +149,8 @@ void game::setnewflag(bool flag) {
     nflag = flag;
 }
 
+bool game::checkForDraw() {
+    return moveList.size() == 9 && !checkForWin(true) && !checkForWin(false);
+}
+
 
